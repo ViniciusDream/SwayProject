@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabores da Ásia: Central e do Sul</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f5f2;
+            scroll-behavior: smooth;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+        
+        .dish-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .dish-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .flip-card {
+            perspective: 1000px;
+        }
+        
+        .flip-card-inner {
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+        }
+        
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .spice-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .spice-delay-1 { animation-delay: 0.5s; }
+        .spice-delay-2 { animation-delay: 1s; }
+        .spice-delay-3 { animation-delay: 1.5s; }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero flex items-center justify-center text-center text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <div class="relative z-10 px-4">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-bounce">Sabores da Ásia</h1>
+            <p class="text-xl md:text-2xl mb-8">Uma jornada gastronômica pela Ásia Central e do Sul</p>
+            <a href="#explore" class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full font-semibold transition duration-300 inline-block transform hover:scale-105">
+                Explorar Sabores
+            </a>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 text-center">
+            <a href="#intro" class="text-white text-4xl animate-bounce">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="intro" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Uma Fusão de Tradições e Sabores</h2>
+                <div class="w-24 h-1 bg-amber-600 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+                    A culinária da Ásia Central e do Sul é uma tapeçaria vibrante de sabores, especiarias e técnicas ancestrais. 
+                    Das montanhas do Afeganistão às planícies da Índia, cada região oferece uma experiência gastronômica única.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                         alt="Mercado de especiarias" 
+                         class="rounded-lg shadow-xl w-full h-auto">
+                    <div class="absolute -bottom-6 -right-6 bg-amber-500 text-white p-4 rounded-lg shadow-lg">
+                        <i class="fas fa-pepper-hot text-3xl"></i>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">O Coração da Culinária Asiática</h3>
+                    <p class="text-gray-600 mb-6">
+                        As rotas da seda não transportavam apenas mercadorias, mas também influências culinárias que moldaram 
+                        as cozinhas do Uzbequistão, Tajiquistão, Cazaquistão, Paquistão, Índia e países vizinhos.
+                    </p>
+                    
+                    <div class="flex space-x-4 mb-6">
+                        <div class="spice-icon bg-amber-100 p-3 rounded-full">
+                            <i class="fas fa-mortar-pestle text-amber-600 text-2xl"></i>
+                        </div>
+                        <div class="spice-icon spice-delay-1 bg-red-100 p-3 rounded-full">
+                            <i class="fas fa-pepper-hot text-red-600 text-2xl"></i>
+                        </div>
+                        <div class="spice-icon spice-delay-2 bg-green-100 p-3 rounded-full">
+                            <i class="fas fa-leaf text-green-600 text-2xl"></i>
+                        </div>
+                        <div class="spice-icon spice-delay-3 bg-yellow-100 p-3 rounded-full">
+                            <i class="fas fa-wheat-awn text-yellow-600 text-2xl"></i>
+                        </div>
+                    </div>
+                    
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
+                            Técnicas ancestrais de preparo
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
+                            Uso generoso de especiarias
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-amber-500 mr-2"></i>
+                            Influências persas, mongóis e turcas
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Parallax Section -->
+    <section class="parallax py-32" style="background-image: url('https://images.unsplash.com/photo-1585032226651-759b1d7b0927?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+        <div class="container mx-auto px-4 text-center text-black">
+            <h2 class="text-4xl font-bold mb-6">Mais que Comida, uma Experiência Cultural</h2>
+            <p class="text-xl max-w-3xl mx-auto">
+                Cada prato conta uma história de migrações, conquistas e trocas culturais que remontam a séculos.
+            </p>
+        </div>
+    </section>
+
+    <!-- Cuisine Tabs -->
+    <section id="explore" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Explore as Regiões</h2>
+                <div class="w-24 h-1 bg-amber-600 mx-auto mb-6"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- Tab Buttons -->
+                <div class="flex flex-wrap justify-center mb-12 gap-2">
+                    <button onclick="openTab(event, 'central')" class="tab-button bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition hover:bg-amber-700 active">
+                        Ásia Central
+                    </button>
+                    <button onclick="openTab(event, 'south')" class="tab-button bg-gray-200 text-gray-800 px-6 py-2 rounded-full font-medium transition hover:bg-gray-300">
+                        Ásia do Sul
+                    </button>
+                    <button onclick="openTab(event, 'spices')" class="tab-button bg-gray-200 text-gray-800 px-6 py-2 rounded-full font-medium transition hover:bg-gray-300">
+                        Especiarias
+                    </button>
+                    <button onclick="openTab(event, 'techniques')" class="tab-button bg-gray-200 text-gray-800 px-6 py-2 rounded-full font-medium transition hover:bg-gray-300">
+                        Técnicas
+                    </button>
+                </div>
+                
+                <!-- Tab Contents -->
+                <div id="central" class="tab-content active">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="dish-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-bread-slice text-amber-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Pão Naan</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                O pão tradicional do Uzbequistão e Tajiquistão, assado em tandoor (forno de barro), 
+                                frequentemente decorado com sementes de gergelim ou nigella.
+                            </p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                Popular em: Uzbequistão, Tajiquistão, Afeganistão
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-red-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-utensils text-red-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Plov (Osh)</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                O prato nacional do Uzbequistão, feito com arroz, carne (geralmente cordeiro), cenoura 
+                                e cebola, cozido em caldo rico com especiarias.
+                            </p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                Prato nacional do Uzbequistão
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-green-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-drumstick-bite text-green-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Shashlik</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                Espetinhos de carne marinada (cordeiro, frango ou carne bovina) grelhados, 
+                                frequentemente servidos com cebolas cruas e pão.
+                            </p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                Popular em toda a Ásia Central
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-ice-cream text-blue-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Qurutob</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                Prato tajique feito com pão, queijo seco (qurut), cebola e vegetais, 
+                                regado com óleo quente e servido em uma grande bandeja.
+                            </p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                Especialidade do Tajiquistão
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="south" class="tab-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="dish-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-utensils text-yellow-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Biryani</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                Arroz aromático cozido com carne (frango, carneiro ou carne bovina), 
+                                especiarias e às vezes com ovos e batatas, originário do subcontinente indiano.
+                            </p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                Popular na Índia, Paquistão e Bangladesh
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-red-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-pepper-hot text-red-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Vindaloo</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                Prato picante de Goa com influência portuguesa, feito com carne (geralmente porco) 
+                                marinada em vinagre e uma mistura de especiarias quentes.
+                            </p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                Originário de Goa, Índia
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-green-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-leaf text-green-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Dal Makhani</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                Prato de lentilhas cremoso e rico, feito com feijão preto, manteiga e creme, 
+                                temperado com gengibre, alho e especiarias.
+                            </p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                Originário do Punjab
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-drumstick-bite text-blue-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Tandoori Chicken</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                Frango marinado em iogurte e especiarias (incluindo pó de pimentão, cominho e garam masala), 
+                                assado em forno tandoor em alta temperatura.
+                            </p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                Originário do Punjab
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="spices" class="tab-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="flip-card">
+                            <div class="flip-card-inner bg-white rounded-xl shadow-md h-full">
+                                <div class="flip-card-front p-6">
+                                    <div class="flex items-center mb-4">
+                                        <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                            <i class="fas fa-seedling text-yellow-600 text-xl"></i>
+                                        </div>
+                                        <h3 class="text-xl font-semibold">Cominho</h3>
+                                    </div>
+                                    <p class="text-gray-600 mb-4">
+                                        Uma das especiarias mais importantes na culinária da Ásia Central e do Sul, 
+                                        usado em praticamente todos os pratos salgados.
+                                    </p>
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-fire mr-2"></i>
+                                        Intensidade: Moderada
+                                    </div>
+                                </div>
+                                <div class="flip-card-back p-6 bg-amber-50 rounded-xl text-center flex flex-col justify-center">
+                                    <h4 class="text-lg font-semibold mb-2">Usos Principais</h4>
+                                    <ul class="text-gray-700 space-y-1">
+                                        <li>Plov (Ásia Central)</li>
+                                        <li>Curries (Ásia do Sul)</li>
+                                        <li>Marinadas para carne</li>
+                                        <li>Tempero para pães</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flip-card">
+                            <div class="flip-card-inner bg-white rounded-xl shadow-md h-full">
+                                <div class="flip-card-front p-6">
+                                    <div class="flex items-center mb-4">
+                                        <div class="bg-red-100 p-3 rounded-full mr-4">
+                                            <i class="fas fa-pepper-hot text-red-600 text-xl"></i>
+                                        </div>
+                                        <h3 class="text-xl font-semibold">Pimenta Kashmiri</h3>
+                                    </div>
+                                    <p class="text-gray-600 mb-4">
+                                        Pimenta vermelha seca que dá cor vibrante aos pratos com um nível de picância moderado, 
+                                        muito usada na culinária do norte da Índia e Paquistão.
+                                    </p>
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-fire mr-2"></i>
+                                        Intensidade: Moderada a Alta
+                                    </div>
+                                </div>
+                                <div class="flip-card-back p-6 bg-red-50 rounded-xl text-center flex flex-col justify-center">
+                                    <h4 class="text-lg font-semibold mb-2">Usos Principais</h4>
+                                    <ul class="text-gray-700 space-y-1">
+                                        <li>Rogan Josh (Caxemira)</li>
+                                        <li>Tandoori marinades</li>
+                                        <li>Vindaloo</li>
+                                        <li>Chutneys</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flip-card">
+                            <div class="flip-card-inner bg-white rounded-xl shadow-md h-full">
+                                <div class="flip-card-front p-6">
+                                    <div class="flex items-center mb-4">
+                                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                                            <i class="fas fa-leaf text-green-600 text-xl"></i>
+                                        </div>
+                                        <h3 class="text-xl font-semibold">Coriandro</h3>
+                                    </div>
+                                    <p class="text-gray-600 mb-4">
+                                        Tanto as folhas frescas (como erva) quanto as sementes secas (como especiaria) são usadas 
+                                        extensivamente em ambas as regiões.
+                                    </p>
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-fire mr-2"></i>
+                                        Intensidade: Suave
+                                    </div>
+                                </div>
+                                <div class="flip-card-back p-6 bg-green-50 rounded-xl text-center flex flex-col justify-center">
+                                    <h4 class="text-lg font-semibold mb-2">Usos Principais</h4>
+                                    <ul class="text-gray-700 space-y-1">
+                                        <li>Chutneys frescos</li>
+                                        <li>Tempero para lentilhas</li>
+                                        <li>Marinadas</li>
+                                        <li>Decoração de pratos</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flip-card">
+                            <div class="flip-card-inner bg-white rounded-xl shadow-md h-full">
+                                <div class="flip-card-front p-6">
+                                    <div class="flex items-center mb-4">
+                                        <div class="bg-purple-100 p-3 rounded-full mr-4">
+                                            <i class="fas fa-spa text-purple-600 text-xl"></i>
+                                        </div>
+                                        <h3 class="text-xl font-semibold">Garam Masala</h3>
+                                    </div>
+                                    <p class="text-gray-600 mb-4">
+                                        Mistura de especiarias que varia por região, geralmente contendo canela, cardamomo, 
+                                        cravo, cominho e pimenta preta.
+                                    </p>
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-fire mr-2"></i>
+                                        Intensidade: Complexa
+                                    </div>
+                                </div>
+                                <div class="flip-card-back p-6 bg-purple-50 rounded-xl text-center flex flex-col justify-center">
+                                    <h4 class="text-lg font-semibold mb-2">Composição Típica</h4>
+                                    <ul class="text-gray-700 space-y-1">
+                                        <li>Cominho</li>
+                                        <li>Coentro</li>
+                                        <li>Cardamomo</li>
+                                        <li>Canela</li>
+                                        <li>Cravo</li>
+                                        <li>Noz-moscada</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="techniques" class="tab-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="dish-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-orange-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-fire text-orange-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Cozimento em Tandoor</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                Forno de barro cilíndrico que atinge altas temperaturas, usado para assar pães (como naan) 
+                                e carnes (como frango tandoori).
+                            </p>
+                            <div class="text-sm text-gray-500">
+                                <i class="fas fa-history mr-2"></i>
+                                Técnica ancestral com mais de 5.000 anos
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-layer-group text-blue-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Cozimento em Camadas (Dum)</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                Técnica usada no biryani onde arroz e carne são cozidos juntos em camadas, 
+                                selados com massa para reter o vapor e os sabores.
+                            </p>
+                            <div class="text-sm text-gray-500">
+                                <i class="fas fa-chess-queen mr-2"></i>
+                                Desenvolvida nas cozinhas reais Mughal
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-green-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-mortar-pestle text-green-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Tempero por Fases (Tadka)</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                Técnica de fritar especiarias em óleo ou manteiga clarificada (ghee) para liberar seus aromas 
+                                antes de adicionar outros ingredientes.
+                            </p>
+                            <div class="text-sm text-gray-500">
+                                <i class="fas fa-atom mr-2"></i>
+                                Base da maioria dos curries e dals
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-drumstick-bite text-amber-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Marinação Prolongada</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                Carnes são frequentemente marinadas por horas ou até dias em misturas de iogurte, 
+                                especiarias e ácidos (como limão ou vinagre) para amaciar e aromatizar.
+                            </p>
+                            <div class="text-sm text-gray-500">
+                                <i class="fas fa-clock mr-2"></i>
+                                Pode levar de 2 horas a 2 dias
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recipe Carousel -->
+    <section id="recipes" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Receitas para Experimentar</h2>
+                <div class="w-24 h-1 bg-amber-600 mx-auto mb-6"></div>
+            </div>
+            
+            <div class="relative max-w-4xl mx-auto">
+                <div class="overflow-hidden">
+                    <div class="flex transition-transform duration-300 ease-in-out" id="recipe-carousel">
+                        <div class="min-w-full px-4">
+                            <div class="bg-gray-50 rounded-xl p-8 shadow-md">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Plov Uzbeque</h3>
+                                        <div class="flex items-center mb-4">
+                                            <div class="flex items-center text-amber-500 mr-6">
+                                                <i class="fas fa-clock mr-2"></i>
+                                                <span>2 horas</span>
+                                            </div>
+                                            <div class="flex items-center text-gray-600">
+                                                <i class="fas fa-utensils mr-2"></i>
+                                                <span>6 porções</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <h4 class="font-semibold text-lg mb-2 text-gray-800">Ingredientes:</h4>
+                                        <ul class="mb-6 space-y-2 text-gray-600">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>500g de carne de cordeiro em cubos</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>2 xícaras de arroz basmati</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>3 cenouras grandes cortadas em palitos</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>1 cebola grande fatiada</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>1/2 xícara de óleo vegetal</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>1 colher de sopa de cominho</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>Sal a gosto</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div>
+                                        <h4 class="font-semibold text-lg mb-2 text-gray-800">Modo de Preparo:</h4>
+                                        <ol class="space-y-3 text-gray-600">
+                                            <li class="flex">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">1</span>
+                                                <span>Aqueça o óleo em uma panela grande e doure a carne em fogo alto. Retire e reserve.</span>
+                                            </li>
+                                            <li class="flex">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">2</span>
+                                                <span>Na mesma panela, refogue as cebolas até ficarem macias. Adicione as cenouras e cozinhe por 5 minutos.</span>
+                                            </li>
+                                            <li class="flex">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">3</span>
+                                                <span>Retorne a carne à panela, adicione cominho e sal. Cubra com água quente e cozinhe por 40 minutos em fogo médio.</span>
+                                            </li>
+                                            <li class="flex">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">4</span>
+                                                <span>Lave o arroz e adicione à panela, cobrindo com água para ficar 1cm acima do arroz. Cozinhe em fogo baixo até a água evaporar.</span>
+                                            </li>
+                                            <li class="flex">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">5</span>
+                                                <span>Faça buracos no arroz com uma colher de pau para o vapor escapar. Tampe e cozinhe por mais 20 minutos em fogo muito baixo.</span>
+                                            </li>
+                                            <li class="flex">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">6</span>
+                                                <span>Misture delicadamente antes de servir, decorando com fatias de cenoura crua se desejar.</span>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="min-w-full px-4">
+                            <div class="bg-gray-50 rounded-xl p-8 shadow-md">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Chicken Tikka Masala</h3>
+                                        <div class="flex items-center mb-4">
+                                            <div class="flex items-center text-amber-500 mr-6">
+                                                <i class="fas fa-clock mr-2"></i>
+                                                <span>1h30 (mais marinada)</span>
+                                            </div>
+                                            <div class="flex items-center text-gray-600">
+                                                <i class="fas fa-utensils mr-2"></i>
+                                                <span>4 porções</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <h4 class="font-semibold text-lg mb-2 text-gray-800">Ingredientes:</h4>
+                                        <ul class="mb-6 space-y-2 text-gray-600">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>500g de peito de frango em cubos</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>1 xícara de iogurte natural</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>2 colheres de sopa de pasta de alho e gengibre</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>1 colher de sopa de garam masala</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>1 colher de chá de pimentão em pó</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>1 lata de tomate pelado</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+                                                <span>1/2 xícara de creme de leite</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div>
+                                        <h4 class="font-semibold text-lg mb-2 text-gray-800">Modo de Preparo:</h4>
+                                        <ol class="space-y-3 text-gray-600">
+                                            <li class="flex">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">1</span>
+                                                <span>Misture o iogurte com metade da pasta de alho e gengibre, garam masala e pimentão. Adicione o frango e marine por pelo menos 2 horas (idealmente durante a noite).</span>
+                                            </li>
+                                            <li class="flex">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">2</span>
+                                                <span>Asse o frango marinado no forno a 200°C por 15-20 minutos até dourar.</span>
+                                            </li>
+                                            <li class="flex">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">3</span>
+                                                <span>Em uma panela, refogue o restante da pasta de alho e gengibre em um pouco de óleo por 1 minuto.</span>
+                                            </li>
+                                            <li class="flex">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">4</span>
+                                                <span>Adicione os tomates e cozinhe por 10 minutos até formar um molho espesso.</span>
+                                            </li>
+                                            <li class="flex">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">5</span>
+                                                <span>Adicione o creme de leite e o frango assado, cozinhando por mais 5 minutos.</span>
+                                            </li>
+                                            <li class="flex">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">6</span>
+                                                <span>Sirva com arroz basmati e naan fresco.</span>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="absolute top-1/2 left-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md transform -translate-x-4 hover:scale-110 transition" onclick="prevRecipe()">
+                    <i class="fas fa-chevron-left text-gray-800 text-xl"></i>
+                </button>
+                
+                <button class="absolute top-1/2 right-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md transform translate-x-4 hover:scale-110 transition" onclick="nextRecipe()">
+                    <i class="fas fa-chevron-right text-gray-800 text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Galeria de Sabores</h2>
+                <div class="w-24 h-1 bg-amber-600 mx-auto mb-6"></div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Imagem 1 com link -->
+                <a href="https://eurasia.travel/pt/uzbekistan/food/plov/" class="relative group overflow-hidden rounded-lg block">
+                    <img src="imagen/Plov Uzbeque.jpg" 
+                         alt="Plov uzbeque" 
+                         class="w-full h-48 md:h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <p class="text-white font-medium">Plov Uzbeque</p>
+                    </div>
+                </a>
+                
+                <!-- Imagem 2 com link -->
+                <a href="https://www.receiteria.com.br/receita/naan-bread/" class="relative group overflow-hidden rounded-lg block">
+                    <img src="imagen/Naan Bread.jpeg" 
+                         alt="Naan bread" 
+                         class="w-full h-48 md:h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <p class="text-white font-medium">Pão Naan Fresco</p>
+                    </div>
+                </a>
+                
+                <!-- Imagem 3 com link -->
+                <a href="https://rotasdeviagem.com.br/conheca-as-especiarias-mais-famosas-e-marcantes-da-india/" class="relative group overflow-hidden rounded-lg block">
+                    <img src="imagen/Indian Curry.jpg" 
+                         alt="Indian curry" 
+                         class="w-full h-48 md:h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <p class="text-white font-medium">Curry Indiano</p>
+                    </div>
+                </a>
+                
+                <!-- Imagem 4 com link -->
+                <a href="https://brasilescola.uol.com.br/historiag/as-especiarias-indianas.htm" class="relative group overflow-hidden rounded-lg block">
+                    <img src="imagen/Spice Market.jpeg" 
+                         alt="Spice market" 
+                         class="w-full h-48 md:h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <p class="text-white font-medium">Mercado de Especiarias</p>
+                    </div>
+                </a>
+                
+                <!-- Imagem 5 com link -->
+                <a href="https://www.receitex.com.br/receita/samosa/" class="relative group overflow-hidden rounded-lg block">
+                    <img src="imagen/Samosas Crocantes.jpg" 
+                         alt="Samosa" 
+                         class="w-full h-48 md:h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <p class="text-white font-medium">Samosas Crocantes</p>
+                    </div>
+                </a>
+                
+                <!-- Imagem 6 com link -->
+                <a href="https://foodandroad.com/pt-br/biryani-arroz-indiano/" class="relative group overflow-hidden rounded-lg block">
+                    <img src="imagen/Biriyani.jpg" 
+                         alt="Biryani" 
+                         class="w-full h-48 md:h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <p class="text-white font-medium">Biryani Colorido</p>
+                    </div>
+                </a>
+                
+                <!-- Imagem 7 com link -->
+                <a href="https://www.tudoreceitas.com/receita-de-frango-indiano-facil-8016.html" class="relative group overflow-hidden rounded-lg block">
+                    <img src="imagen/Tandoori.jpg" 
+                         alt="Tandoori chicken" 
+                         class="w-full h-48 md:h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <p class="text-white font-medium">Frango Tandoori</p>
+                    </div>
+                </a>
+                
+                <!-- Imagem 8 com link -->
+                <a href="https://catracalivre.com.br/gastronomia/como-fazer-lassi-uma-bebida/" class="relative group overflow-hidden rounded-lg block">
+                    <img src="imagen/Lassi Tradicional.webp" 
+                         alt="Lassi" 
+                         class="w-full h-48 md:h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <p class="text-white font-medium">Lassi Tradicional</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+   <section class="py-20 bg-amber-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Explore Mais Receitas Asiáticas</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Descubra nossa coleção completa de receitas autênticas no Sway.
+            </p>
+            
+            <a href="https://sway.cloud.microsoft/Lawe51EiaRbrmfbs?ref=Link" 
+               target="_blank"
+               class="inline-block bg-white text-amber-600 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg transition duration-300 transform hover:scale-105 shadow-lg">
+                <i class="fas fa-external-link-alt mr-2"></i> Saiba mais no Sway
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Sabores da Ásia</h3>
+                    <p class="text-gray-400">
+                        Explorando e celebrando as ricas tradições culinárias da Ásia Central e do Sul.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Explorar</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#central" class="text-gray-400 hover:text-white transition">Ásia Central</a></li>
+                        <li><a href="#south" class="text-gray-400 hover:text-white transition">Ásia do Sul</a></li>
+                        <li><a href="#recipes" class="text-gray-400 hover:text-white transition">Receitas</a></li>
+                        <li><a href="#techniques" class="text-gray-400 hover:text-white transition">Técnicas</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Recursos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="https://brasilescola.uol.com.br/geografia/asia.htm" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="https://www.worldpackers.com/pt-BR/articles/pratos-imperdiveis-comida-asiatica" class="text-gray-400 hover:text-white transition">Guias</a></li>
+                        <li><a href="https://www.sadestar.com.br/2020/06/lista-de-41-especiarias-e-seus-usos.html" class="text-gray-400 hover:text-white transition">Dicionário de Especiarias</a></li>
+                        <li><a href="https://www.asiashop.com.br/" class="text-gray-400 hover:text-white transition">Onde Comprar</a></li>
+                    </ul>
+                </div>
+                
+                 <div>
+                    <h4 class="font-semibold mb-4">Conecte-se</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="https://www.instagram.com/3tds_a_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="bg-gray-800 hover:bg-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        </a>
+                        <a href="https://www.youtube.com/@sesi" class="bg-gray-800 hover:bg-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400">2tdstarde@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Sabores da Ásia por Marcos Vinícius Bonfin de Oliveira.</p>
+            </div>
+        </div>
+    </footer>
+    </footer>
+
+    <script>
+        // Tab functionality
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            const tabButtons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("bg-amber-600", "text-white");
+                tabButtons[i].classList.add("bg-gray-200", "text-gray-800");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.remove("bg-gray-200", "text-gray-800");
+            evt.currentTarget.classList.add("bg-amber-600", "text-white");
+        }
+        
+        // Recipe carousel
+        let currentRecipe = 0;
+        const recipes = document.querySelectorAll('#recipe-carousel > div');
+        
+        function showRecipe(index) {
+            const carousel = document.getElementById('recipe-carousel');
+            carousel.style.transform = `translateX(-${index * 100}%)`;
+            currentRecipe = index;
+        }
+        
+        function nextRecipe() {
+            currentRecipe = (currentRecipe + 1) % recipes.length;
+            showRecipe(currentRecipe);
+        }
+        
+        function prevRecipe() {
+            currentRecipe = (currentRecipe - 1 + recipes.length) % recipes.length;
+            showRecipe(currentRecipe);
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
